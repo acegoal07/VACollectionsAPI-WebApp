@@ -2,7 +2,25 @@ main {
    padding: 1rem;
 }
 
+.show-block {
+   display: block !important;
+
+}
+
+.show-inline {
+   display: inline !important;
+}
+
+a.btn {
+   padding: 1rem;
+   background-color: blue;
+   color: white;
+}
+
 /* Search view */
+#search-form {
+   display: none;
+}
 fieldset {
    margin: 3em;
    padding: 2em;
@@ -40,4 +58,10 @@ input, textarea {
    display: none;
    text-align: center;
    justify-content: center;
+}
+
+div.record_display {
+   margin: 1em;
+   padding: 1em;
+   border: 1px solid #000;
 }
