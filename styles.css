@@ -1,0 +1,43 @@
+main {
+   padding: 1rem;
+}
+
+/* Search view */
+fieldset {
+   margin: 3em;
+   padding: 2em;
+}
+
+input, textarea {
+   display: block;
+   margin-bottom: 1em;
+   width: 100%;
+}
+
+.hint {
+   display: none;
+   color: red;
+}
+
+/* Loading view */
+#loading-view {
+   display: none;
+   text-align: center;
+   padding-top: 9em;
+   justify-content: center;
+}
+
+/* Error view */
+#error-view {
+   display: none;
+   text-align: center;
+   padding-top: 9em;
+   justify-content: center;
+}
+
+/* Result view */
+#search-results {
+   display: none;
+   text-align: center;
+   justify-content: center;
+}

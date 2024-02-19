@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>V&A searcher</title>
+   <link rel="stylesheet" type="text/css" href="styles.css">
+   <script src="scripts.js"></script>
+</head>
+
+<body>
+   <main>
+      <!-- Search form view -->
+      <div id="search-form">
+         <form>
+            <fieldset>
+
+               <legend>What would you like to search the V&A for?</legend>
+
+               <label for="search_query">Search term*</label>
+               <span id="hint_search_query" class="hint"> - please enter a search term</span>
+               <input id="search_query" type="text"/>
+
+
+               <!-- <label for="message">Message*</label>
+               <span id="hint_message" class="hint"> - please enter a message</span>
+               <textarea id="message"></textarea> -->
+
+
+               <input type="submit" value="Search"/>
+            </fieldset>
+         </form>
+      </div>
+      <!-- Search result view -->
+      <div id="search-results">
+         <h2>Search results</h2>
+         <a id="back-to-search" role="link">Another search</a>
+         <div class="search_results">
+         </div>
+      </div>
+      <!-- Error view -->
+      <div id="error-view">
+         <h2>An error happened</h2>
+         <a id="try-again" role="link">Another search</a>
+      </div>
+      <!-- Loading view -->
+      <div id="loading-view">
+         <h2>Loading results...</h2>
+      </div>
+   </main>
+</body>
+
+</html>
