@@ -14,14 +14,14 @@ window.addEventListener("load", () => {
       const hint_page_size_selector = document.querySelector("#hint_page_size_selector");
    
       let fields_valid = true;
-   
+      // Check if the query input is valid
       if (search_query === "" || search_query.length < 0) {
          hint_search_query.classList.add("show-inline");
          fields_valid = false;
       } else {
          hint_search_query.classList.remove("show-inline");
       }
-
+      // Check if the page size input is valid
       if (page_size === "" || page_size.length < 0) {
          hint_page_size_selector.classList.add("show-inline");
          fields_valid = false;
@@ -37,15 +37,14 @@ window.addEventListener("load", () => {
                if (response.ok) {
                   const response_data = await response.json();
                   const records_data = response_data.records;
-                  // loop through the records and display the results
                   records_data.forEach(record => {
                      const record_div = `
                         <div class="record_display">
                            <h2>Record ${record.systemNumber}</h2>
-                           ${record._images._primary_thumbnail === undefined ? "<p>No image available</p>" : `<img src='${record._images._primary_thumbnail}' alt='${record._primaryTitle}'/>`}
-                           <p>Title: ${record._primaryTitle === '' ? "No title" : record._primaryTitle}</p>
-                           <p>Date: ${record._primaryDate === '' ? "No date" : record._primaryDate}</p>
-                           <p>Description: ${record.summaryDescription === '' ? "no description available" : record.summaryDescription}</p>             
+                           ${record._images._primary_thumbnail === undefined ? "<strong><p>No image available</p></strong>" : `<img src='${record._images._primary_thumbnail}' alt='${record._primaryTitle}'/>`}
+                           <p><strong>Title:</strong> ${record._primaryTitle === '' ? "No title" : record._primaryTitle}</p>
+                           <p><strong>Date:</strong> ${record._primaryDate === '' ? "No date" : record._primaryDate}</p>
+                           <p><strong>Summary description:</strong> ${record.summaryDescription === '' ? "No description available" : record.summaryDescription}</p>             
                         </div>
                      `;
                      document.querySelector("#search_results_output").insertAdjacentHTML("afterbegin", record_div);
