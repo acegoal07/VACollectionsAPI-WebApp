@@ -1,5 +1,4 @@
 window.addEventListener("load", () => {
-
    document.querySelector("#search-form").addEventListener("submit", async (event) => {
       event.preventDefault();
 
@@ -38,7 +37,7 @@ window.addEventListener("load", () => {
                   const response_data = await response.json();
                   const records_data = response_data.records;
                   records_data.forEach(record => {
-                     const record_div = `
+                     document.querySelector("#search_results_output").insertAdjacentHTML("afterbegin", `
                         <div class="record_display">
                            <h2>Record ${record.systemNumber}</h2>
                            ${record._images._primary_thumbnail === undefined ? "<strong><p>No image available</p></strong>" : `<img src='${record._images._primary_thumbnail}' alt='${record._primaryTitle}'/>`}
@@ -46,8 +45,7 @@ window.addEventListener("load", () => {
                            <p><strong>Date:</strong> ${record._primaryDate === '' ? "No date" : record._primaryDate}</p>
                            <p><strong>Summary description:</strong> ${record.summaryDescription === '' ? "No description available" : record.summaryDescription}</p>             
                         </div>
-                     `;
-                     document.querySelector("#search_results_output").insertAdjacentHTML("afterbegin", record_div);
+                     `);
                   });
                   document.querySelector("#loading-view").classList.remove("show-block");
                   document.querySelector("#search-results").classList.add("show-block");
