@@ -1,6 +1,10 @@
 /* Body */
+html {
+   scroll-behavior: smooth;
+}
+
 main {
-   padding: 1rem;
+   padding: 1em;
 }
 
 /* Universal */
@@ -28,15 +32,25 @@ fieldset {
    padding: 2em;
 }
 
-input, textarea {
+input,
+textarea {
    display: block;
    margin-bottom: 1em;
    width: 100%;
 }
 
+input[type="checkbox"] {
+   display: inline;
+   width: auto;
+}
+
 .hint {
    display: none;
    color: red;
+}
+
+div.form-item {
+   margin-bottom: 1em;
 }
 
 /* Loading view */
@@ -65,5 +79,9 @@ input, textarea {
 div.record_display {
    margin: 1em;
    padding: 1em;
+   padding-top: 0.5em;
+   padding-bottom: 0.5em;
    border: 1px solid #000;
+   text-align: left;
+   border-radius: 1.5em;
 }
