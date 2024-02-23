@@ -35,7 +35,7 @@ window.addEventListener("load", () => {
          document.querySelector("#search-form").classList.remove("show-block");
          document.querySelector("#loading-view").classList.add("show-block");
          // Fetch the data from the API
-         await fetch(`https://api.vam.ac.uk/v2/objects/search?q=${search_query}&page_size=${page_size}&data_profile=full${image_required ? "&images_exist=true" : ""}`)
+         await fetch(`https://api.vam.ac.uk/v2/objects/search?q=${search_query}&page_size=${page_size}&data_profile=full&images_exist=${image_required}`)
          .then(async response => {
                if (response.ok) {
                   return await response.json();
@@ -72,10 +72,6 @@ window.addEventListener("load", () => {
                         .then(async response => {
                            if (response.ok) {
                               return await response.blob();
-                           } else {
-                              let img_error = document.createElement("p");
-                              img_error.textContent = "No image available";
-                              div.appendChild(img_error);
                            }
                         }).then(blob => {
                            let img = document.createElement("img");
