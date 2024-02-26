@@ -1,8 +1,8 @@
 window.addEventListener("load", () => {
    document.querySelector("#search-form").addEventListener("submit", async (event) => {
       event.preventDefault();
-      
-      // Clear previous search results 
+
+      // Clear previous search results
       document.querySelector("#search_results_output").querySelectorAll("*").forEach(n => n.remove());
 
       // Get values from the form
@@ -36,7 +36,7 @@ window.addEventListener("load", () => {
          document.querySelector("#loading-view").classList.add("show-block");
          // Fetch the data from the API
          await fetch(`https://api.vam.ac.uk/v2/objects/search?q=${search_query}&page_size=${page_size}&data_profile=full&images_exist=${image_required}`)
-         .then(async response => {
+            .then(async response => {
                if (response.ok) {
                   return await response.json();
                } else {
@@ -78,6 +78,13 @@ window.addEventListener("load", () => {
                            img.src = URL.createObjectURL(blob);
                            img.alt = record._primaryTitle;
                            div.appendChild(img);
+                           let imgLink = document.createElement("a");
+                           imgLink.href = record._images._iiif_image_base_url + "/full/full/0/default.jpg";
+                           imgLink.setAttribute("target", "_blank");
+                           imgLink.setAttribute("rel", "noopener noreferrer");
+                           imgLink.style.display = "block";
+                           imgLink.textContent = "View full image";
+                           div.appendChild(imgLink);
                         }).catch(error => {
                            let img_error = document.createElement("p");
                            img_error.textContent = "No image available";
