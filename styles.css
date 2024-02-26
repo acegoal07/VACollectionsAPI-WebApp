@@ -85,3 +85,8 @@ div.record_display {
    text-align: left;
    border-radius: 1.5em;
 }
+
+a.record_full_image_link {
+   display: block;
+   margin-top: 1em;
+}

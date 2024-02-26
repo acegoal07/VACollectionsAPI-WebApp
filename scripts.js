@@ -82,7 +82,7 @@ window.addEventListener("load", () => {
                            imgLink.href = record._images._iiif_image_base_url + "/full/full/0/default.jpg";
                            imgLink.setAttribute("target", "_blank");
                            imgLink.setAttribute("rel", "noopener noreferrer");
-                           imgLink.style.display = "block";
+                           imgLink.classList.add("record_full_image_link");
                            imgLink.textContent = "View full image";
                            div.appendChild(imgLink);
                         }).catch(error => {
