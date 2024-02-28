@@ -8,6 +8,8 @@ window.addEventListener("load", () => {
       // Get values from the form
       var page_size = document.querySelector("#size-select").value;
       var image_required = document.querySelector("#image_check").checked;
+      var order_by = document.querySelector("#order_by").value === "null" ? "" : `&order_by=${document.querySelector("#order_by").value}`;
+      var order_sort = document.querySelector("#order_sort").value === "null" ? "" : `&order_sort=${document.querySelector("#order_sort").value}`;
       var search_query = document.querySelector("#search_query").value;
 
       // Get handle to the hint messages
@@ -30,12 +32,14 @@ window.addEventListener("load", () => {
          hint_page_size_selector.classList.remove("show-inline");
       }
 
+      console.log(order_by)
+
       if (fields_valid) {
          // Hide the search form and show the loading view
          document.querySelector("#search-form").classList.remove("show-block");
          document.querySelector("#loading-view").classList.add("show-block");
          // Fetch the data from the API
-         await fetch(`https://api.vam.ac.uk/v2/objects/search?q=${search_query}&page_size=${page_size}&data_profile=full&images_exist=${image_required}`)
+         await fetch(`https://api.vam.ac.uk/v2/objects/search?q=${search_query}${order_by}${order_sort}&page_size=${page_size}&data_profile=full&images_exist=${image_required}`)
             .then(async response => {
                if (response.ok) {
                   return await response.json();

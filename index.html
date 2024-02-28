@@ -21,7 +21,7 @@
                   <label for="page_size_selector">How many items:</label>
                   <span id="hint_page_size_selector" class="hint"> - please enter a search term</span>
                   <select name="page_size_selector" id="size-select" title="Page Size">
-                     <option value="10">10</option>
+                     <option value="15">15</option>
                      <option value="25">25</option>
                      <option value="50">50</option>
                      <option value="75">75</option>
@@ -30,7 +30,27 @@
                </div>
 
                <div class="form-item">
-                  <label for="image_check" class="indented-checkbox-text">Needs an image</label>
+                  <label for="order_by">Order by:</label>
+                    <select name="order-by" id="order_by" title="Select a pet">
+                     <option value="null">-- No order --</option>
+                     <option value="location">location</option>
+                     <option value="artist">Artist</option>
+                     <option value="place">Place</option>
+                     <option value="date">Date</option>
+                     <option value="fields_populated">Fields populated</option>
+                   </select>
+               </div>
+               
+               <div class="form-item">
+                  <label for="order_sort">Order sort:</label>
+                    <select name="order-sort" id="order_sort" title="Select a pet">
+                     <option value="asc">A to Z</option>
+                     <option value="desc">Z to A</option>
+                   </select>
+               </div>
+
+               <div class="form-item">
+                  <label for="image_check" class="indented-checkbox-text">Needs an image:</label>
                   <input type="checkbox" id="image_check" name="image_check" value="&images_exist=true" checked>
                </div>
 
