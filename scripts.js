@@ -6,11 +6,9 @@ window.addEventListener("load", () => {
       document.querySelector("#search_results_output").querySelectorAll("*").forEach(n => n.remove());
 
       // Get values from the form
-      var page_size = document.querySelector("#size-select").value;
-      var image_required = document.querySelector("#image_check").checked;
-      var order_by = document.querySelector("#order_by").value === "null" ? "" : `&order_by=${document.querySelector("#order_by").value}`;
-      var order_sort = document.querySelector("#order_sort").value === "null" ? "" : `&order_sort=${document.querySelector("#order_sort").value}`;
-      var search_query = document.querySelector("#search_query").value;
+      let page_size = document.querySelector("#size-select").value;
+      let image_required = document.querySelector("#image_check").checked;
+      let search_query = document.querySelector("#search_query").value;
 
       // Get handle to the hint messages
       const hint_page_size_selector = document.querySelector("#hint_page_size_selector");
@@ -32,100 +30,105 @@ window.addEventListener("load", () => {
          hint_page_size_selector.classList.remove("show-inline");
       }
 
-      console.log(order_by)
-
       if (fields_valid) {
          // Hide the search form and show the loading view
          document.querySelector("#search-form").classList.remove("show-block");
          document.querySelector("#loading-view").classList.add("show-block");
          // Fetch the data from the API
-         await fetch(`https://api.vam.ac.uk/v2/objects/search?q=${search_query}${order_by}${order_sort}&page_size=${page_size}&data_profile=full&images_exist=${image_required}`)
-            .then(async response => {
-               if (response.ok) {
-                  return await response.json();
-               } else {
-                  document.querySelector("#loading-view").classList.remove("show-block");
-                  document.querySelector("#error-view").classList.add("show-block");
-               }
-            }).then(data => {
-               const records_data = data.records;
-               const search_results_output = document.querySelector("#search_results_output");
-               if (records_data.length === 0) {
+         await fetch(
+            "https://api.vam.ac.uk/v2/objects/" +
+            `search?q=${search_query}` +
+            `&page_size=${page_size}` +
+            `${document.querySelector("#order_by").value === "null" ? "" : `&order_by=${document.querySelector("#order_by").value}`}` +
+            `${document.querySelector("#order_sort").value === "null" ? "" : `&order_sort=${document.querySelector("#order_sort").value}`}` +
+            `&data_profile=full` +
+            `&images_exist=${image_required}`
+         ).then(async response => {
+            if (response.ok) {
+               return await response.json();
+            } else {
+               document.querySelector("#loading-view").classList.remove("show-block");
+               document.querySelector("#error-view").classList.add("show-block");
+            }
+         }).then(data => {
+            const records_data = data.records;
+            const search_results_output = document.querySelector("#search_results_output");
+            if (records_data.length === 0) {
+               let div = document.createElement("div");
+               div.setAttribute("class", "record_display");
+
+               let h2 = document.createElement("h2");
+               h2.textContent = "No records found";
+               div.appendChild(h2);
+
+               let p = document.createElement("p");
+               p.textContent = "There are no records that match your search query";
+               div.appendChild(p);
+
+               search_results_output.appendChild(div);
+            } else {
+               records_data.forEach(async record => {
                   let div = document.createElement("div");
                   div.setAttribute("class", "record_display");
 
                   let h2 = document.createElement("h2");
-                  h2.textContent = "No records found";
+                  h2.textContent = `Record ${record.systemNumber}`;
                   div.appendChild(h2);
 
-                  let p = document.createElement("p");
-                  p.textContent = "There are no records that match your search query";
-                  div.appendChild(p);
+                  await fetch(record._images._primary_thumbnail)
+                     .then(async response => {
+                        if (response.ok) {
+                           return await response.blob();
+                        }
+                     }).then(blob => {
+                        let img = document.createElement("img");
+                        img.src = URL.createObjectURL(blob);
+                        img.alt = record._primaryTitle;
+                        div.appendChild(img);
+                        let imgLink = document.createElement("a");
+                        imgLink.href = record._images._iiif_image_base_url + "/full/full/0/default.jpg";
+                        imgLink.setAttribute("target", "_blank");
+                        imgLink.setAttribute("rel", "noopener noreferrer");
+                        imgLink.classList.add("record_full_image_link");
+                        imgLink.textContent = "View full image";
+                        div.appendChild(imgLink);
+                     }).catch(error => {
+                        let img_error = document.createElement("p");
+                        img_error.textContent = "No image available";
+                        div.appendChild(img_error);
+                     });
+
+                  let title_header = document.createElement("h3");
+                  title_header.textContent = "Title:";
+                  div.appendChild(title_header);
+                  let title = document.createElement("p");
+                  title.textContent = `${record._primaryTitle === '' ? "No title" : record._primaryTitle}`;
+                  div.appendChild(title);
+
+                  let date_header = document.createElement("h3");
+                  date_header.textContent = "Date:";
+                  div.appendChild(date_header);
+                  let date = document.createElement("p");
+                  date.textContent = `${record._primaryDate === '' ? "No date" : record._primaryDate}`;
+                  div.appendChild(date);
+
+                  let summary_description_header = document.createElement("h3");
+                  summary_description_header.textContent = "Summary description:";
+                  div.appendChild(summary_description_header);
+                  let summary_description = document.createElement("p");
+                  summary_description.textContent = `${record.summaryDescription === '' ? "No description available" : record.summaryDescription.replaceAll(/<[^>]*>?/gm, '')}`;
+                  div.appendChild(summary_description);
 
                   search_results_output.appendChild(div);
-               } else {
-                  records_data.forEach(async record => {
-                     let div = document.createElement("div");
-                     div.setAttribute("class", "record_display");
-
-                     let h2 = document.createElement("h2");
-                     h2.textContent = `Record ${record.systemNumber}`;
-                     div.appendChild(h2);
-
-                     await fetch(record._images._primary_thumbnail)
-                        .then(async response => {
-                           if (response.ok) {
-                              return await response.blob();
-                           }
-                        }).then(blob => {
-                           let img = document.createElement("img");
-                           img.src = URL.createObjectURL(blob);
-                           img.alt = record._primaryTitle;
-                           div.appendChild(img);
-                           let imgLink = document.createElement("a");
-                           imgLink.href = record._images._iiif_image_base_url + "/full/full/0/default.jpg";
-                           imgLink.setAttribute("target", "_blank");
-                           imgLink.setAttribute("rel", "noopener noreferrer");
-                           imgLink.classList.add("record_full_image_link");
-                           imgLink.textContent = "View full image";
-                           div.appendChild(imgLink);
-                        }).catch(error => {
-                           let img_error = document.createElement("p");
-                           img_error.textContent = "No image available";
-                           div.appendChild(img_error);
-                        });
-
-                     let title_header = document.createElement("h3");
-                     title_header.textContent = "Title:";
-                     div.appendChild(title_header);
-                     let title = document.createElement("p");
-                     title.textContent = `${record._primaryTitle === '' ? "No title" : record._primaryTitle}`;
-                     div.appendChild(title);
-
-                     let date_header = document.createElement("h3");
-                     date_header.textContent = "Date:";
-                     div.appendChild(date_header);
-                     let date = document.createElement("p");
-                     date.textContent = `${record._primaryDate === '' ? "No date" : record._primaryDate}`;
-                     div.appendChild(date);
-
-                     let summary_description_header = document.createElement("h3");
-                     summary_description_header.textContent = "Summary description:";
-                     div.appendChild(summary_description_header);
-                     let summary_description = document.createElement("p");
-                     summary_description.textContent = `${record.summaryDescription === '' ? "No description available" : record.summaryDescription.replaceAll(/<[^>]*>?/gm, '')}`;
-                     div.appendChild(summary_description);
-
-                     search_results_output.appendChild(div);
-                  });
-               }
-               document.querySelector("#loading-view").classList.remove("show-block");
-               document.querySelector("#search-results").classList.add("show-block");
-            }).catch(error => {
-               document.querySelector("#loading-view").classList.remove("show-block");
-               document.querySelector("#error-view").classList.add("show-block");
-               console.error(error);
-            });
+               });
+            }
+            document.querySelector("#loading-view").classList.remove("show-block");
+            document.querySelector("#search-results").classList.add("show-block");
+         }).catch(error => {
+            document.querySelector("#loading-view").classList.remove("show-block");
+            document.querySelector("#error-view").classList.add("show-block");
+            console.error(error);
+         });
       }
    });
 

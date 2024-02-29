@@ -4,7 +4,12 @@ html {
 }
 
 main {
-   padding: 1em;
+   padding: 1rem;
+   font-size: medium;
+}
+
+.pb-1 {
+   padding-bottom: 1rem;
 }
 
 /* Universal */
@@ -16,32 +21,55 @@ main {
    display: inline !important;
 }
 
-a.btn {
-   padding: 1rem;
-   background-color: blue;
-   color: white;
-}
-
 /* Search view */
 #search-form {
    display: none;
 }
 
 fieldset {
-   margin: 3em;
-   padding: 2em;
+   margin: 3rem;
+   padding: 2rem;
+}
+
+@media only screen and (max-width: 1120px) {
+   fieldset {
+      margin: 0;
+      padding: 1rem;
+   }
+}
+
+@media only screen and (max-width: 720px) {
+   main {
+      padding: 0.2rem;
+   }
 }
 
 input,
 textarea {
    display: block;
-   margin-bottom: 1em;
    width: 100%;
+   font-size: large;
+}
+
+select {
+   font-size: large;
 }
 
 input[type="checkbox"] {
    display: inline;
    width: auto;
+   
+}
+
+input[type="text"] {
+   height: 3rem;
+
+}
+
+input[type="submit"] {
+   margin-top: 1rem;
+   padding: 1rem;
+   justify-self: center;
 }
 
 .hint {

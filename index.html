@@ -5,8 +5,9 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>V&A searcher</title>
-   <link rel="stylesheet" type="text/css" href="styles.css">
-   <script src="scripts.js"></script>
+   <meta name="description" content="Search the V&A collection">
+   <link rel="stylesheet" media="all" href="styles-min.css">
+   <script src="scripts-min.js" defer></script>
 </head>
 
 <body>
@@ -18,7 +19,7 @@
                <legend><strong>V&A Searcher</strong></legend>
 
                <div class="form-item">
-                  <label for="page_size_selector">How many items:</label>
+                  <label for="page_size_selector"><strong>How many items:</strong></label>
                   <span id="hint_page_size_selector" class="hint"> - please enter a search term</span>
                   <select name="page_size_selector" id="size-select" title="Page Size">
                      <option value="15">15</option>
@@ -30,37 +31,38 @@
                </div>
 
                <div class="form-item">
-                  <label for="order_by">Order by:</label>
-                    <select name="order-by" id="order_by" title="Select a pet">
+                  <label for="order_by"><strong>Order by:</strong></label>
+                  <select name="order-by" id="order_by" title="Select a pet">
                      <option value="null">-- No order --</option>
                      <option value="location">location</option>
                      <option value="artist">Artist</option>
                      <option value="place">Place</option>
                      <option value="date">Date</option>
                      <option value="fields_populated">Fields populated</option>
-                   </select>
-               </div>
-               
-               <div class="form-item">
-                  <label for="order_sort">Order sort:</label>
-                    <select name="order-sort" id="order_sort" title="Select a pet">
-                     <option value="asc">A to Z</option>
-                     <option value="desc">Z to A</option>
-                   </select>
+                  </select>
                </div>
 
                <div class="form-item">
-                  <label for="image_check" class="indented-checkbox-text">Needs an image:</label>
+                  <label for="order_sort"><strong>Order sort:</strong></label>
+                  <select name="order-sort" id="order_sort" title="Select a pet">
+                     <option value="asc">A to Z</option>
+                     <option value="desc">Z to A</option>
+                  </select>
+               </div>
+
+               <div class="form-item">
+                  <label for="image_check" class="indented-checkbox-text"><strong>Requires an image:</strong></label>
                   <input type="checkbox" id="image_check" name="image_check" value="&images_exist=true" checked>
                </div>
 
                <div class="form-item">
-                  <label for="search_query">Search term*</label>
-                  <span id="hint_search_query" class="hint"> - please enter a search term</span>
-                  <input id="search_query" type="text" />
+                  <span id="hint_search_query" class="hint pb-1"><strong>Query missing</strong></span>
+                  <input id="search_query" type="text" placeholder="Enter your search query" />
                </div>
 
-               <input type="submit" value="Search" />
+               <div class="form-item">
+                  <input type="submit" value="Search" />
+               </div>
             </fieldset>
          </form>
       </div>
