@@ -50,7 +50,7 @@ window.addEventListener("load", () => {
             const search_results_output = document.querySelector("#search_results_output");
             if (records_data.length === 0) {
                let div = document.createElement("div");
-               div.setAttribute("class", "record_display");
+               div.classList.add("record_display");
 
                let h2 = document.createElement("h2");
                h2.textContent = "No records found";
@@ -64,7 +64,7 @@ window.addEventListener("load", () => {
             } else {
                records_data.forEach(async record => {
                   let div = document.createElement("div");
-                  div.setAttribute("class", "record_display");
+                  div.classList.add("record_display");
 
                   let h2 = document.createElement("h2");
                   h2.textContent = `Record ${record.systemNumber}`;
