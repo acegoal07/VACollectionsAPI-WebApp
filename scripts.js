@@ -18,12 +18,10 @@ window.addEventListener("load", () => {
       // Check if the query input is valid
       if (search_query === "" || search_query.length < 0) {
          hint_search_query.classList.add("show-inline");
-         search_query_box.classList.add("mt-1");
          search_query_box.classList.add("input-error");
          fields_valid = false;
       } else {
          hint_search_query.classList.remove("show-inline");
-         search_query_box.classList.remove("mt-1");
          search_query_box.classList.remove("input-error");
       }
 
@@ -32,7 +30,7 @@ window.addEventListener("load", () => {
          document.querySelector("#search-form").classList.remove("show-block");
          document.querySelector("#loading-view").classList.add("show-block");
          // Fetch the data from the API
-         await fetch(
+         fetch(
             "https://api.vam.ac.uk/v2/objects/" +
             `search?q=${search_query}` +
             `&page_size=${page_size}` +
