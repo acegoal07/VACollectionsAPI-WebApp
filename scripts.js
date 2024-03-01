@@ -11,23 +11,20 @@ window.addEventListener("load", () => {
       let search_query = document.querySelector("#search_query").value;
 
       // Get handle to the hint messages
-      const hint_page_size_selector = document.querySelector("#hint_page_size_selector");
       const hint_search_query = document.querySelector("#hint_search_query");
+      const search_query_box = document.querySelector("#search_query");
 
       let fields_valid = true;
       // Check if the query input is valid
       if (search_query === "" || search_query.length < 0) {
          hint_search_query.classList.add("show-inline");
+         search_query_box.classList.add("mt-1");
+         search_query_box.classList.add("input-error");
          fields_valid = false;
       } else {
          hint_search_query.classList.remove("show-inline");
-      }
-      // Check if the page size input is valid
-      if (page_size === "" || page_size.length < 0) {
-         hint_page_size_selector.classList.add("show-inline");
-         fields_valid = false;
-      } else {
-         hint_page_size_selector.classList.remove("show-inline");
+         search_query_box.classList.remove("mt-1");
+         search_query_box.classList.remove("input-error");
       }
 
       if (fields_valid) {

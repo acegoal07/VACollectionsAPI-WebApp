@@ -15,51 +15,52 @@
       <!-- Search form view -->
       <div id="search-form" class="show-block">
          <form>
-            <fieldset>
+            <fieldset id="body">
                <legend><strong>V&A Searcher</strong></legend>
 
                <div class="form-item">
-                  <label for="page_size_selector"><strong>How many items:</strong></label>
-                  <span id="hint_page_size_selector" class="hint"> - please enter a search term</span>
-                  <select name="page_size_selector" id="size-select" title="Page Size">
-                     <option value="15">15</option>
-                     <option value="25">25</option>
-                     <option value="50">50</option>
-                     <option value="75">75</option>
-                     <option value="100">100</option>
-                  </select>
-               </div>
-
-               <div class="form-item">
-                  <label for="order_by"><strong>Order by:</strong></label>
-                  <select name="order-by" id="order_by" title="Select a pet">
-                     <option value="null">-- No order --</option>
-                     <option value="location">location</option>
-                     <option value="artist">Artist</option>
-                     <option value="place">Place</option>
-                     <option value="date">Date</option>
-                     <option value="fields_populated">Fields populated</option>
-                  </select>
-               </div>
-
-               <div class="form-item">
-                  <label for="order_sort"><strong>Order sort:</strong></label>
-                  <select name="order-sort" id="order_sort" title="Select a pet">
-                     <option value="asc">A to Z</option>
-                     <option value="desc">Z to A</option>
-                  </select>
-               </div>
-
-               <div class="form-item">
-                  <label for="image_check" class="indented-checkbox-text"><strong>Requires an image:</strong></label>
-                  <input type="checkbox" id="image_check" name="image_check" value="&images_exist=true" checked>
-               </div>
-
-               <div class="form-item">
-                  <span id="hint_search_query" class="hint pb-1"><strong>Query missing</strong></span>
+                  <span id="hint_search_query" class="hint"><strong>Query missing</strong></span>
                   <input id="search_query" type="text" placeholder="Enter your search query" />
                </div>
 
+               <fieldset id="options">
+                  <legend><strong>Options</strong></legend>
+                  <div class="form-item">
+                     <label for="page_size_selector"><strong>How many items:</strong></label>
+                     <select name="page_size_selector" id="size-select" title="Page Size">
+                        <option value="15">15</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="75">75</option>
+                        <option value="100">100</option>
+                     </select>
+                  </div>
+
+                  <div class="form-item">
+                     <label for="order_by"><strong>Order by:</strong></label>
+                     <select name="order-by" id="order_by" title="Select a pet">
+                        <option value="null">-- No order --</option>
+                        <option value="location">location</option>
+                        <option value="artist">Artist</option>
+                        <option value="place">Place</option>
+                        <option value="date">Date</option>
+                        <option value="fields_populated">Fields populated</option>
+                     </select>
+                  </div>
+
+                  <div class="form-item">
+                     <label for="order_sort"><strong>Order sort:</strong></label>
+                     <select name="order-sort" id="order_sort" title="Select a pet">
+                        <option value="asc">A to Z</option>
+                        <option value="desc">Z to A</option>
+                     </select>
+                  </div>
+
+                  <div class="form-item">
+                     <label for="image_check" class="indented-checkbox-text"><strong>Requires an image:</strong></label>
+                     <input type="checkbox" id="image_check" name="image_check" value="&images_exist=true" checked>
+                  </div>
+               </fieldset>
                <div class="form-item">
                   <input type="submit" value="Search" />
                </div>
