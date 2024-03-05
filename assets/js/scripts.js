@@ -81,13 +81,16 @@ window.addEventListener("load", () => {
                         img.src = URL.createObjectURL(blob);
                         img.alt = record._primaryTitle;
                         div.appendChild(img);
+                        let imgLinkContainer = document.createElement("div");
+                        imgLinkContainer.classList.add("btn-container");
                         let imgLink = document.createElement("a");
                         imgLink.href = record._images._iiif_image_base_url + "/full/full/0/default.jpg";
                         imgLink.setAttribute("target", "_blank");
                         imgLink.setAttribute("rel", "noopener noreferrer");
-                        imgLink.classList.add("record_link");
+                        imgLink.classList.add("record_link", "btn");
                         imgLink.textContent = "View full image";
-                        div.appendChild(imgLink);
+                        imgLinkContainer.appendChild(imgLink);
+                        div.appendChild(imgLinkContainer);
                      }).catch(error => {
                         let img = document.createElement("img");
                         img.src = "assets/images/no-image-available.png";
@@ -117,13 +120,16 @@ window.addEventListener("load", () => {
                   summary_description.textContent = `${record.summaryDescription === '' ? "No description available" : record.summaryDescription.replaceAll(/<[^>]*>?/gm, '')}`;
                   div.appendChild(summary_description);
 
+                  let linkContainer = document.createElement("div");
+                  linkContainer.classList.add("btn-container");
                   let fullRecord = document.createElement("a");
                   fullRecord.href = "http://collections.vam.ac.uk/item/" + record.systemNumber;
                   fullRecord.setAttribute("target", "_blank");
                   fullRecord.setAttribute("rel", "noopener noreferrer");
-                  fullRecord.classList.add("record_link");
+                  fullRecord.classList.add("record_link", "btn");
                   fullRecord.textContent = "View V&A Collection Record";
-                  div.appendChild(fullRecord);
+                  linkContainer.appendChild(fullRecord);
+                  div.appendChild(linkContainer);
 
                   search_results_output.appendChild(div);
                });

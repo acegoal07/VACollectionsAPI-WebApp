@@ -35,6 +35,7 @@ h1.header {
    text-decoration: none;
    color: black;
    cursor: pointer;
+   width: auto;
 }
 
 .btn:hover {
@@ -46,9 +47,13 @@ h1.header {
    box-shadow: 0 5px 15px #0000004d;
 }
 
-.btn-container {
+.btn-container-center {
    display: flex;
    justify-content: center;
+}
+
+.btn-container {
+   display: flex;
 }
 
 /* Search view */
