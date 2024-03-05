@@ -36,8 +36,8 @@ window.addEventListener("load", () => {
             `&page_size=${page_size}` +
             `${document.querySelector("#order_by").value === "null" ? "" : `&order_by=${document.querySelector("#order_by").value}`}` +
             `${document.querySelector("#order_sort").value === "null" ? "" : `&order_sort=${document.querySelector("#order_sort").value}`}` +
-            `&data_profile=full` +
-            `&images_exist=${image_required}`
+            `&images_exist=${image_required}` +
+            `&data_profile=full`
          ).then(async response => {
             if (response.ok) {
                return await response.json();
@@ -46,6 +46,7 @@ window.addEventListener("load", () => {
                document.querySelector("#error-view").classList.add("show-block");
             }
          }).then(data => {
+            console.log(data);
             const records_data = data.records;
             const search_results_output = document.querySelector("#search_results_output");
             if (records_data.length === 0) {
@@ -84,13 +85,15 @@ window.addEventListener("load", () => {
                         imgLink.href = record._images._iiif_image_base_url + "/full/full/0/default.jpg";
                         imgLink.setAttribute("target", "_blank");
                         imgLink.setAttribute("rel", "noopener noreferrer");
-                        imgLink.classList.add("record_full_image_link");
+                        imgLink.classList.add("record_link");
                         imgLink.textContent = "View full image";
                         div.appendChild(imgLink);
                      }).catch(error => {
-                        let img_error = document.createElement("p");
-                        img_error.textContent = "No image available";
-                        div.appendChild(img_error);
+                        let img = document.createElement("img");
+                        img.src = "assets/images/no-image-available.png";
+                        img.alt = "No image available";
+                        img.classList.add("error-image");
+                        div.appendChild(img);
                      });
 
                   let title_header = document.createElement("h3");
@@ -113,6 +116,14 @@ window.addEventListener("load", () => {
                   let summary_description = document.createElement("p");
                   summary_description.textContent = `${record.summaryDescription === '' ? "No description available" : record.summaryDescription.replaceAll(/<[^>]*>?/gm, '')}`;
                   div.appendChild(summary_description);
+
+                  let fullRecord = document.createElement("a");
+                  fullRecord.href = "http://collections.vam.ac.uk/item/" + record.systemNumber;
+                  fullRecord.setAttribute("target", "_blank");
+                  fullRecord.setAttribute("rel", "noopener noreferrer");
+                  fullRecord.classList.add("record_link");
+                  fullRecord.textContent = "View V&A Collection Record";
+                  div.appendChild(fullRecord);
 
                   search_results_output.appendChild(div);
                });

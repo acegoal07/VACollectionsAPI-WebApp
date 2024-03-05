@@ -6,8 +6,8 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>V&A searcher</title>
    <meta name="description" content="Search the V&A collection">
-   <link rel="stylesheet" media="all" href="styles-min.css">
-   <script src="scripts-min.js" defer></script>
+   <link rel="stylesheet" media="all" href="assets/css/styles.css">
+   <script src="assets/js/scripts.js" defer></script>
 </head>
 
 <body>
@@ -15,8 +15,8 @@
       <!-- Search form view -->
       <div id="search-form" class="show-block">
          <form>
+            <h1 class="header">V&A Searcher</h1>
             <fieldset id="body">
-               <legend><strong>V&A Searcher</strong></legend>
 
                <div class="form-item">
                   <label for="search_query"><strong>Search query:</strong></label>
@@ -70,19 +70,25 @@
       </div>
       <!-- Search result view -->
       <div id="search-results">
-         <h2>Search results</h2>
-         <a id="back-to-search" role="button" href="">Another search</a>
+         <h1 class="header">Search results</h1>
+         <div class="btn-container">
+            <a id="back-to-search" role="button" class="btn">Another search</a>
+         </div>
          <div id="search_results_output" class="search_results"></div>
-         <a href="#">back to the top</a>
+         <div class="btn-container">
+            <a role="button" class="btn" href="#">back to the top</a>
+         </div>
       </div>
       <!-- Error view -->
       <div id="error-view">
-         <h2>An error happened</h2>
-         <a id="try-again" role="button" href="">Another search</a>
+         <h1 class="header">An error happened</h1>
+         <div class="btn-container">
+            <a id="try-again" role="button" class="btn">Another search</a>
+         </div>
       </div>
       <!-- Loading view -->
       <div id="loading-view">
-         <h2>Loading results...</h2>
+         <img src="assets/images/loading.gif" alt="Loading" />
       </div>
    </main>
 </body>
