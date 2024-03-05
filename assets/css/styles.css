@@ -36,6 +36,11 @@ h1.header {
    color: black;
    cursor: pointer;
    width: auto;
+   -webkit-transition: transform 0.3s ease;
+   -o-transition: transform 0.3s ease;
+   -ms-transition: transform 0.3s ease;
+   -moz-transition: transform 0.3s ease;
+   transition: transform 0.3s ease;
 }
 
 .btn:hover {
@@ -130,6 +135,11 @@ input[type="submit"] {
    justify-self: center;
    border-radius: 1rem;
    box-shadow: 0 2px 5px #0000004d;
+   -webkit-transition: transform 0.3s ease;
+   -o-transition: transform 0.3s ease;
+   -ms-transition: transform 0.3s ease;
+   -moz-transition: transform 0.3s ease;
+   transition: transform 0.3s ease;
 }
 
 input[type="submit"]:hover {
